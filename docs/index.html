@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17262b">
+  <meta name="description" content="피클볼 동호회의 선수 출석, 청백팀 복식 매칭과 세 코트의 경기 현황을 관리하세요.">
+  <title>CourtSide | 피클볼 운영 대시보드</title>
+  <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="panels.css">
+  <link rel="stylesheet" href="calls.css">
+  <script src="engine.js" defer></script>
+  <script src="backup.js" defer></script>
+  <script src="panels.js" defer></script>
+  <script src="voice.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="topbar"><div class="nav-shell">
+    <a href="#dashboard" class="brand" aria-label="CourtSide 홈"><img src="assets/mark.svg" alt="" width="35" height="35"><span>CourtSide</span></a>
+    <nav aria-label="주 메뉴" id="navigation"></nav>
+    <div id="today" class="today"></div>
+  </div></header>
+  <div id="voice-banner" class="voice-banner" role="status" hidden></div>
+  <main id="main" tabindex="-1"></main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="app-dialog" aria-labelledby="dialog-title"></dialog>
+  <noscript>코트 자동 배정을 사용하려면 브라우저에서 자바스크립트를 켜주세요.</noscript>
+</body>
+</html>

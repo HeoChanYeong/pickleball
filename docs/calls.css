@@ -1,0 +1,23 @@
+.court-next,.court-call{padding:12px 15px;border-top:1px solid var(--line);font-size:.83rem;min-width:0;grid-column:1/-1}
+.court-next{background:#f6f8f5;color:#293e34}
+.court-call{background:#edf5da;color:#273921}
+.call-heading{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-bottom:7px}
+.call-heading h4{margin:0;font-size:.9rem}
+.next-tag{display:block;font-size:.61rem;letter-spacing:.12em;color:#667764;font-weight:700}
+.court-next p,.court-call p{margin:4px 0;color:#4a594d}
+.call-team{display:grid;grid-template-columns:3em minmax(0,1fr);gap:6px;align-items:baseline;margin:5px 0}
+.call-team>strong{font-size:.78rem;white-space:nowrap}
+.call-team>span{display:flex;flex-wrap:wrap;gap:3px 10px}
+.call-person{overflow-wrap:anywhere;line-height:1.6}
+.call-person small{color:#58655b;white-space:nowrap}
+.call-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.call-tools button,.call-replay{border:1px solid #b5c4b4;border-radius:7px;background:white;color:#294332;padding:5px 9px;font:inherit;font-size:.79rem;font-weight:650;cursor:pointer}
+.call-tools .confirm-call{background:#273c31;color:white;border-color:#273c31}
+.court-replay-tools{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:5px}
+.voice-fields{display:grid;gap:12px;margin-block:14px}
+.voice-fields label{display:grid;gap:5px;font-size:.88rem;font-weight:650}
+.voice-fields select{width:100%;padding:9px;border-radius:7px;border:1px solid #bdc9bf;background:white;font:inherit}
+@media(max-width:620px){.court-call,.court-next{grid-column:1/-1;grid-row:auto;padding:10px 13px}.call-tools button,.call-replay{min-height:36px}.call-person{font-size:.91rem}.court-card>.court-bottom{flex-wrap:wrap}}
+
+.forecast-note{margin:-2px 0 12px;color:#58655b;font-size:.8rem;line-height:1.45}
+.voice-banner{margin:8px auto 0;max-width:1100px;background:#edf5da;color:#273921;padding:8px 16px;border-radius:8px;font-size:.88rem;overflow-wrap:anywhere}
