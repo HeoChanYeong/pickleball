@@ -273,7 +273,7 @@
     const name = typeof data.name === 'string' ? data.name.trim() : '';
     if (!name) throw new Error('선수 이름을 입력해 주세요.');
     if (!teams.includes(data.team)) throw new Error('청팀 또는 백팀을 선택해 주세요.');
-    if (!levels.includes(data.level)) throw new Error('하수, 중수, 고수 중 하나를 선택해 주세요.');
+    if (!levels.includes(data.level)) throw new Error('A, B, C 중 하나를 선택해 주세요.');
     if (state.players.some(player =>
       player.id !== id && player.team === data.team && normalizeName(player.name) === normalizeName(name)
     )) throw new Error('같은 팀에 같은 이름의 선수가 있습니다. 구분할 이름을 입력해 주세요.');

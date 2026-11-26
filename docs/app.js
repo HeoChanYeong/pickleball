@@ -4,7 +4,7 @@
   const storeKey = 'courtside.club.match.v1:' + new URL('.', location.href).pathname;
   const backup = window.CourtBackup;
   const levels = ['beginner', 'intermediate', 'advanced'];
-  const levelName = {beginner:'하수', intermediate:'중수', advanced:'고수'};
+  const levelName = {beginner:'A', intermediate:'B', advanced:'C'};
   const teamName = {blue:'청팀', white:'백팀'};
   const tabs = {dashboard:['dashboard','대시보드'], roster:['users','선수 명단'], history:['history','경기 기록']};
   const symbols = {

@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  const grades = {beginner: '하수', intermediate: '중수', advanced: '고수'};
   const E = window.CourtEngine;
 
   function koreanVoices() {
@@ -104,8 +103,7 @@
       if (!voice || !synth || !window.SpeechSynthesisUtterance) return Promise.resolve('failed');
       const names = job.item.playerIds.map(id => s.players.find(p => p.id === id).name);
       const court = (job.index + 1) + '번 코트';
-      const text = court + ', ' + grades[job.item.level] + ' 다음 경기 선수를 안내합니다. 청팀 ' +
-        names.slice(0, 2).join(' 선수, ') + ' 선수. 백팀 ' + names.slice(2).join(' 선수, ') +
+      const text = court + ', ' + names.join(' 선수, ') +
         ' 선수. 네 분은 ' + court + '로 이동해 주세요.';
       return new Promise(resolve => {
         let settled = false;

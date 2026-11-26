@@ -2,7 +2,7 @@
   "use strict";
 
   const teamNames = { blue: "청팀", white: "백팀" };
-  const levelNames = { beginner: "하수", intermediate: "중수", advanced: "고수" };
+  const levelNames = { beginner: "A", intermediate: "B", advanced: "C" };
   const rosterFilters = { query: "", team: "", level: "" };
   let historyTab = "matches";
   let sessionFilter = "";
@@ -179,7 +179,7 @@
   function renderRoster(state, container, api) {
     const blueCount = state.players.filter(p => p.team === "blue").length;
     const description = state.phase === "live"
-      ? "등급 칸에서 하수·중수·고수를 변경하세요. 새 등급은 다음 배정부터 적용됩니다."
+      ? "등급 칸에서 A·B·C를 변경하세요. 새 등급은 다음 배정부터 적용됩니다."
       : "선수 이름과 소속 팀, 실력 등급을 관리하세요.";
     container.innerHTML = '<section class="cs-panel" aria-labelledby="cp-roster-heading"><div class="cp-page-heading"><div><h1 id="cp-roster-heading">선수 명단</h1>' +
       '<p>' + description + '</p></div>' +
