@@ -202,9 +202,12 @@
       return '<div class="call-team"><strong><i class="team-dot '+side+'"></i> '+teamName[side]+'</strong><span>'+names+'</span></div>';
     }).join('');
   }
-  function nextHTML(match) {
-    return '<section class="court-next"><div class="call-heading"><div><span class="next-tag" lang="en">NEXT MATCH</span><h4>다음 경기 예정</h4></div>'+
-      (match?levelLabel(match.level):'')+'</div>'+(match?lineupHTML(match):'<p>다음 경기 대기 중</p>')+'</section>';
+  function nextPoolHTML(previews) {
+    const playersById=new Map(state.players.map(p=>[p.id,p]));
+    const ids=[...new Set(previews.filter(Boolean).flatMap(match=>match.playerIds))].slice(0,12);
+    const players=ids.map(id=>playersById.get(id)).filter(Boolean);
+    const cards=players.map(p=>'<li class="next-pool-person"><div class="next-pool-name">'+escape(p.name)+'</div><div class="next-pool-meta"><span><i class="team-dot '+p.team+'"></i> '+teamName[p.team]+'</span>'+levelLabel(p.level)+'<span>'+p.games+'회</span></div></li>').join('');
+    return '<section class="next-pool" aria-labelledby="next-pool-title"><div class="call-heading"><div><span class="next-tag" lang="en">NEXT MATCH</span><h3 id="next-pool-title">다음 경기 예정 <span class="count-tag">'+players.length+'명</span></h3></div></div><p class="forecast-note">최대 12명의 공통 예정 명단입니다. 특정 코트에 예약되지 않으며, 실제 배정은 빈 코트와 출석·경기 결과에 따라 달라질 수 있습니다. 이름 옆 횟수는 오늘 완료한 경기 수입니다.</p>'+(players.length?'<ul class="next-pool-list">'+cards+'</ul>':'<p class="next-pool-empty">다음 경기 대기 중</p>')+'</section>';
   }
   function callHTML(call,index) {
     if (!call) return '';
@@ -249,7 +252,7 @@
   function courtsHTML() {
     const reason=E.waitingReason(state);
     const preview=E.previews(state);
-    return '<section class="block" aria-labelledby="court-title"><div class="section-head"><h2 id="court-title">코트 현황 <span class="count-tag">3</span></h2><div class="court-legend"><span><i class="team-dot blue"></i>청팀</span><span><i class="team-dot white"></i>백팀</span></div></div><p class="forecast-note">다음 경기 예정자는 출석과 경기 결과에 따라 바뀝니다. 이름 옆 숫자는 오늘 완료한 경기 수입니다.</p><div class="courts">'+state.courts.map((match,i)=>{
+    return '<section class="block" aria-labelledby="court-title"><div class="section-head"><h2 id="court-title">코트 현황 <span class="count-tag">3</span></h2><div class="court-legend"><span><i class="team-dot blue"></i>청팀</span><span><i class="team-dot white"></i>백팀</span></div></div><div class="courts">'+state.courts.map((match,i)=>{
       const call=state.pendingCalls?.[i];
       const badge=match ? levelLabel(match.level) : '<span class="level open-level">등급 자유</span>';
       const status=match?'경기 중':call?'배정 전':state.phase==='ended'?'운영 종료':reason==='target'?'목표 달성':'배정 대기';
@@ -263,8 +266,8 @@
       const replaying=voice.current()?.replay && voice.current().index===i;
       const replay=match && state.voiceEnabled!==false ? '<button class="call-replay" data-action="'+(replaying?'replay-stop':'replay')+'" data-index="'+i+'" data-match="'+escape(match.id)+'">'+(replaying?'호출 중지':'다시 듣기')+'</button>':'';
       const replayLabel=replaying?'<p class="court-call">지금 다시 호출 중 · '+match.playerIds.map(id=>escape(state.players.find(p=>p.id===id).name)).join(' · ')+'</p>':'';
-      return '<article class="court-card" aria-label="코트 '+(i+1)+'"><div class="court-heading"><h3 lang="en">COURT 0'+(i+1)+'</h3>'+badge+'</div><div class="field theme-'+i+'"><div class="field-lines"><span class="net"></span><span class="vs" aria-hidden="true">VS</span>'+slots+'</div></div><div class="court-bottom"><span class="court-status '+(match?'live':'')+'"><i class="status-dot"></i>'+status+'</span><div class="court-replay-tools">'+action+replay+'</div></div>'+replayLabel+callHTML(call,i)+nextHTML(preview[i])+'</article>';
-    }).join('')+'</div></section>';
+      return '<article class="court-card" aria-label="코트 '+(i+1)+'"><div class="court-heading"><h3 lang="en">COURT 0'+(i+1)+'</h3>'+badge+'</div><div class="field theme-'+i+'"><div class="field-lines"><span class="net"></span><span class="vs" aria-hidden="true">VS</span>'+slots+'</div></div><div class="court-bottom"><span class="court-status '+(match?'live':'')+'"><i class="status-dot"></i>'+status+'</span><div class="court-replay-tools">'+action+replay+'</div></div>'+replayLabel+callHTML(call,i)+'</article>';
+    }).join('')+'</div>'+nextPoolHTML(preview)+'</section>';
   }
   function playerStatus(p,busy) {
     if(busy.has(p.id)) return 'active';
